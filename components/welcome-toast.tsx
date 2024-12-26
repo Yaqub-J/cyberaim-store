@@ -16,7 +16,13 @@ export function WelcomeToast() {
         },
         description: (
           <>
-            Welcome to Cyberaim Store... place an order!
+            Welcome to the Cyberaim Store{' '}
+            <a
+              href="https://cyberaim.ng/"
+              className="text-blue-600 hover:underline"
+              target="_blank"
+            >
+              Visit our website
             </a>
             .
           </>
