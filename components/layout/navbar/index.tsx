@@ -1,10 +1,10 @@
-import CartModal from 'components/cart/modal';
 import LogoSquare from 'components/logo-square';
 import { getMenu } from 'lib/shopify';
 import { Menu } from 'lib/shopify/types';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import MobileMenu from './mobile-menu';
+import { NavbarActions } from './navbar-actions';
 import Search, { SearchSkeleton } from './search';
 
 const { SITE_NAME } = process.env;
@@ -13,7 +13,7 @@ export async function Navbar() {
   const menu = await getMenu('next-js-frontend-header-menu');
 
   return (
-    <nav className="relative flex items-center justify-between p-4 lg:px-6 bg-blue-700">
+    <nav className="relative flex items-center justify-between p-4 lg:px-6 bg-primary border-b border-border">
       <div className="block flex-none md:hidden">
         <Suspense fallback={null}>
           <MobileMenu menu={menu} />
@@ -27,7 +27,7 @@ export async function Navbar() {
             className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6"
           >
             <LogoSquare />
-            <div className="ml-2 flex-none text-sm font-medium uppercase md:hidden lg:block">
+            <div className="ml-2 flex-none text-sm font-medium uppercase md:hidden lg:block text-primary-foreground">
               {SITE_NAME}
             </div>
           </Link>
@@ -38,7 +38,7 @@ export async function Navbar() {
                   <Link
                     href={item.path}
                     prefetch={true}
-                    className="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
+                    className="text-primary-foreground/70 underline-offset-4 hover:text-primary-foreground hover:underline"
                   >
                     {item.title}
                   </Link>
@@ -52,9 +52,7 @@ export async function Navbar() {
             <Search />
           </Suspense>
         </div>
-        <div className="flex justify-end md:w-1/3">
-          <CartModal />
-        </div>
+        <NavbarActions />
       </div>
     </nav>
   );
